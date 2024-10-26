@@ -1,10 +1,11 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+type Props = {
+  params: { id: string };
+};
 
-const Blog = () => {
-  const params = useParams();
-  const id = params?.id;
+const Blog = ({ params }: Props) => {
+  const { id } = params;
   console.log('~~id:', id);
 
   return <div>Blog is: {id}</div>;

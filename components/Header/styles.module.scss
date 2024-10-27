@@ -1,0 +1,112 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 88px;
+  background: transparent;
+  border: 1px solid purple;
+  .logoWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    span {
+      margin-left: 8px;
+      color: white;
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -1px;
+    }
+  }
+  nav {
+    ul {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      backdrop-filter: blur(40px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+      li {
+        padding: 4px 12px;
+        .listWrapper {
+          display: flex;
+          align-items: center;
+          .listImg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.1s ease-in-out;
+          }
+          span {
+            margin-left: 8px;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+          }
+        }
+        &.moreWrapper {
+  padding: 4px 12px;
+
+  div {
+    display: flex;
+    align-items: center;
+    cursor: default;
+
+    .listImg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.1s ease-in;
+    }
+
+    span {
+      margin-left: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    &.isMoreHover { // Ensure this is applied to the correct element
+      .listImg {
+        transform: translateY(-2px) scale(1.1);
+      }
+      span {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+        &.isHover {
+          .listWrapper {
+            .listImg {
+              transform: translateY(-2px) scale(1.1);
+            }
+          }
+        }
+      }
+    }
+  }
+  .downloadText {
+    padding: 4px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    backdrop-filter: blur(40px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(204, 204, 204, 0.0878) 20%,
+    rgba(0, 0, 0, 0) 100%
+    );
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+  }
+}

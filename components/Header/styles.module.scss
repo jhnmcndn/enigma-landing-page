@@ -110,13 +110,11 @@
 
 .popOverContainer {
   position: absolute;
-  top: 100%;
-  left: -204px;
   width: 527px;
   height: 320px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
-  border: 1px solid red;
+  transform: translateY(170px) translateX(-200px) !important;
   .popOverWrapper {
     position: absolute;
     display: flex;

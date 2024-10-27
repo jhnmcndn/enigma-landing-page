@@ -5,6 +5,17 @@ import styles from './styles.module.scss';
 import Link from 'next/link';
 import { useState } from 'react';
 import { clsx } from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  LuAlertCircle,
+  LuAlertTriangle,
+  LuHardDriveDownload,
+  LuList,
+  LuMenu,
+  LuPhone,
+  LuShieldCheck,
+  LuWifiOff,
+} from 'react-icons/lu';
 
 const navList = [
   {
@@ -29,70 +40,132 @@ const navList = [
   },
 ];
 
-const Header = () => {
+const moreList = {
+  firstCol: [
+    {
+      name: 'Download',
+      img: <LuHardDriveDownload />,
+      desc: 'Download Enigma Code-ai to boost your coding with AI.',
+      navigateTo: '/download',
+    },
+    {
+      name: 'About',
+      img: <LuAlertCircle />,
+      desc: 'Learn about Enigma Code-ai and our mission to revolutionize.',
+      navigateTo: '/about',
+    },
+    {
+      name: 'Contact',
+      img: <LuPhone />,
+      desc: 'Contact us for support or inquiries.',
+      navigateTo: '/contact',
+    },
+    {
+      name: 'Blog',
+      img: <LuMenu />,
+      desc: 'Read our blog for AI coding insights and tips.',
+      navigateTo: '/blog',
+    },
+  ],
+  secondCol: [
+    {
+      name: 'Detail Blog',
+      img: <LuList />,
+      desc: 'Boost productivity with AI code suggestions. Learn how in this.',
+      navigateTo: '/blog/test',
+    },
+    {
+      name: 'Privacy Policy',
+      img: <LuShieldCheck />,
+      desc: 'Understand how we protect your personal information.',
+      navigateTo: '/privacy-policy',
+    },
+    {
+      name: 'Terms of Service',
+      img: <LuAlertTriangle />,
+      desc: 'Review our terms for using Enigma Code-ai.',
+      navigateTo: '/terms-of-service',
+    },
+    {
+      name: '404',
+      img: <LuWifiOff />,
+      desc: 'Page not found. Return to the homepage.',
+      navigateTo: '/404',
+    },
+  ],
+};
+
+const PopOver = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMoreHover, setIsMoreHover] = useState<boolean>(false);
 
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
+  const handleMouseEnter = (index: number) => setHoveredIndex(index);
+  const handleMouseLeave = () => setHoveredIndex(null);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.logoWrapper}>
-        <Image src='/logo.png' alt='Logo' width={72} height={72} />
-        <span>Enigma-AI</span>
-      </div>
-      <nav>
-        <ul>
-          {navList.map((list, index) => (
-            <li
-              key={index}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              className={clsx({ [styles.isHover]: hoveredIndex === index })}
-            >
-              <Link href={list.navigateTo} className={styles.listWrapper}>
-                <Image
-                  src={list.img}
-                  alt={list.name}
-                  width={32}
-                  height={32}
-                  className={styles.listImg}
-                />
-                <span>{list.name}</span>
-              </Link>
-            </li>
-          ))}
-          <li className={styles.moreWrapper}>
+    <motion.div
+      initial={{ scale: 0.1, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.9, opacity: 0 }}
+      transition={{ duration: 0.2, ease: 'easeOut' }}
+      className={styles.popOverContainer}
+    >
+      <div className={styles.popOverWrapper}>
+        <div className={styles.column}>
+          {moreList.firstCol.map((list, index) => (
             <div
-              onMouseEnter={() => setIsMoreHover(true)}
-              onMouseLeave={() => setIsMoreHover(false)} // Set to false on mouse leave
-              className={clsx({ [styles.isMoreHover]: isMoreHover })} // Ensure correct class name
+              key={index}
+              className={clsx(styles.wrapper, {
+                [styles.isHover]: hoveredIndex === index,
+              })}
             >
-              <Image
-                src='/header/more.png'
-                alt='More'
-                width={32}
-                height={32}
-                className={styles.listImg}
-              />
-              <span>More</span>
+              <div className={styles.icon}>{list.img}</div>
+              <div className={styles.text}>
+                <Link
+                  href={list.navigateTo}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                  className={styles.name}
+                >
+                  {list.name}
+                </Link>
+                <p className={styles.desc}>{list.desc}</p>
+              </div>
             </div>
-          </li>
-        </ul>
-      </nav>
-      <span
-        className={`${styles.downloadText} hover:opacity-50 hover:backdrop-blur-[10px] transition-opacity duration-100`}
-      >
-        Download App
-      </span>
-    </header>
+          ))}
+        </div>
+        <div className={styles.column}>
+          {moreList.secondCol.map((list, index) => (
+            <div
+              key={index}
+              className={clsx(styles.wrapper, {
+                [styles.isHover]:
+                  hoveredIndex === index + moreList.firstCol.length,
+              })}
+            >
+              <div className={styles.icon}>{list.img}</div>
+              <div className={styles.text}>
+                <Link
+                  href={list.navigateTo}
+                  onMouseEnter={() =>
+                    handleMouseEnter(index + moreList.firstCol.length)
+                  }
+                  onMouseLeave={handleMouseLeave}
+                  className={styles.name}
+                >
+                  {list.name}
+                </Link>
+                <p className={styles.desc}>{list.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
+};
+
+const Header = () => {
+  return <div>Header Component</div>;
 };
 
 export default Header;

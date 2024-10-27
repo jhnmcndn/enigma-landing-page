@@ -5,7 +5,6 @@
   width: 100%;
   height: 88px;
   background: transparent;
-  border: 1px solid purple;
   .logoWrapper {
     display: flex;
     justify-content: space-between;
@@ -51,36 +50,34 @@
           }
         }
         &.moreWrapper {
-  padding: 4px 12px;
-
-  div {
-    display: flex;
-    align-items: center;
-    cursor: default;
-
-    .listImg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.1s ease-in;
-    }
-
-    span {
-      margin-left: 8px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    &.isMoreHover { // Ensure this is applied to the correct element
-      .listImg {
-        transform: translateY(-2px) scale(1.1);
-      }
-      span {
-        opacity: 0.5;
-      }
-    }
-  }
-}
+          position: relative;
+          padding: 4px 12px;
+          .wrapper {
+            display: flex;
+            align-items: center;
+            cursor: default;
+            .listImg {
+              width: 16px;
+              height: 16px;
+              transition: transform 0.2s ease-in;
+            }
+            .more {
+              margin-left: 8px;
+              color: #fff;
+              font-size: 13px;
+              font-weight: 500;
+            }
+            &.isMoreHover {
+              position: relative;
+              .listImg {
+                transform: translateY(-2px) scale(1.1);
+              }
+              .more {
+                opacity: 0.5;
+              }
+            }
+          }
+        }
 
         &.isHover {
           .listWrapper {
@@ -108,5 +105,72 @@
     font-weight: 500;
     color: white;
     cursor: pointer;
+  }
+}
+
+.popOverContainer {
+  position: absolute;
+  top: 100%;
+  left: -204px;
+  width: 527px;
+  height: 320px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  border: 1px solid red;
+  .popOverWrapper {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 31px;
+    background: rgba(209, 209, 209, 0.15);
+    padding: 15px;
+    height: auto;
+    border: 1px solid rgba(209, 209, 209, 0.15);
+    border-radius: 15px;
+    width: 100%;
+    bottom: 0;
+    .column {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      .wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+        .icon {
+          color: #fff;
+          font-size: 15px;
+          margin-top: 3px;
+          transition: transform 0.1s ease-in-out;
+        }
+        .text {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          .name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: -0.05px;
+
+          }
+          .desc {
+            font-size: 10px;
+            font-weight: 500;
+            color: rgb(179, 185, 196);
+            letter-spacing: -0.1px;
+          }
+        }
+        &.isHover {
+          .icon {
+            transform: translateY(-2px) scale(1.1);
+          }
+        }
+      }
+    }
   }
 }

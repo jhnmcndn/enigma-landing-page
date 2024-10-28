@@ -11,6 +11,11 @@
 }
 
 body {
-  background: black;
   position: relative;
+  background: #05010D;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
 }

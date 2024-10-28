@@ -1,0 +1,66 @@
+@import 'styles/mixin.scss';
+
+.homeMain {
+  position: relative;
+  width: 100%;
+  .bgWrap {
+    position: absolute;
+    width: 100%;
+    z-index: -10;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .mainContent {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-top: 88px;
+
+    //Hero Section
+    .heroSection {
+      @include flex-xy;
+      flex-direction: column;
+      padding: 112px 120px 96px 120px;
+      .top {
+        @include flex-xy(center, center);
+        gap: 38px;
+        .left {
+          @include flex-xy(center, flex-start);
+          flex-direction: column;
+          gap: 20px;
+          .intro {
+            font-size: 50px;
+            font-weight: 600;
+            letter-spacing: -2px;
+            line-height: 60px;
+            background-image: linear-gradient(292deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 470px;
+            span {
+              font-family: "JetBrains Mono", monospace;
+              font-style: italic;
+            }
+          }
+          .details {
+            font-size: 16px;
+            font-weight: 300;
+            color: #D9D9D9;
+          }
+          .buttonWrapper {
+            .getStartedBtn {
+
+            }
+            .startFreeTrialBtn {
+
+            }
+          }
+        }
+      }
+      .bottom {
+
+      }
+    }
+  }
+}

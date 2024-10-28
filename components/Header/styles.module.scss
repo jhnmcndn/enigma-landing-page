@@ -1,11 +1,17 @@
 .header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  position: absolute;
   width: 100%;
   height: 88px;
   background: transparent;
-  .logoWrapper {
+  z-index: 10;
+  .headerWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    .logoWrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,16 +30,27 @@
   }
   nav {
     ul {
+      position: relative;
       display: flex;
       align-items: center;
       padding: 10px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50px;
-      backdrop-filter: blur(40px);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+      &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 50px;
+        backdrop-filter: blur(40px);
+      }
       li {
         padding: 4px 12px;
+        z-index: 20;
         .listWrapper {
           display: flex;
           align-items: center;
@@ -106,15 +123,17 @@
     color: white;
     cursor: pointer;
   }
+  }
 }
 
 .popOverContainer {
   position: absolute;
   width: 527px;
   height: 320px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   z-index: 10;
   transform: translateY(170px) translateX(-200px) !important;
+  visibility: visible;
+
   .popOverWrapper {
     position: absolute;
     display: flex;
@@ -125,16 +144,20 @@
     padding: 15px;
     height: auto;
     border: 1px solid rgba(209, 209, 209, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     width: 100%;
     bottom: 0;
+    opacity: 1;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     .column {
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
       gap: 18px;
-      .wrapper {
+      .popWrapper {
         display: flex;
         align-items: flex-start;
         gap: 8px;

@@ -1,5 +1,16 @@
+@use 'sass:math';
+
 @mixin flex-xy($justify-content: unset, $align-items: unset) {
   display: flex;
   justify-content: $justify-content;
   align-items: $align-items;
+}
+
+// Convert px to rem. Usage: -- font-size: rem(16);
+@function rem($pixel) {
+  @if math.is-unitless($pixel) {
+    @return math.div($pixel, 16) + rem;
+  } @else {
+    @error "Don't use units when using the rem() function; only numbers.";
+  }
 }

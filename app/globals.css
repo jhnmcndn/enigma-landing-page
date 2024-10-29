@@ -15,7 +15,11 @@ body {
   background: #05010D;
 }
 
-html, body {
+html, body, :root, #root {
   height: 100%;
   width: 100%;
+}
+
+html {
+  font-size: 100%;
 }

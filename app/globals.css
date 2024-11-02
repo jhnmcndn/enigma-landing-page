@@ -13,6 +13,7 @@
 body {
   position: relative;
   background: #05010D;
+  min-width: 100vw;
 }
 
 html, body, :root, #root {

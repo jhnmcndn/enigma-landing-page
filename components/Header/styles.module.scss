@@ -1,0 +1,164 @@
+@import 'styles/mixin.scss';
+
+.header {
+  position: absolute;
+  width: 100%;
+  border: 1px solid red;
+  height: rem(88);
+  z-index: 10;
+  .widthComponent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 rem(140);
+  }
+  .logoWrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+      width: rem(32);
+    }
+    span {
+      font-size: rem(30);
+      font-weight: 600;
+      color: #fff;
+      margin-left: rem(8);
+      letter-spacing: rem(-1);
+    }
+  }
+  .nav {
+    background: rgba(255, 255, 255, 0.1);
+    padding: rem(10);
+    border: rem(1) solid rgba(255, 255, 255, 0.3);
+    border-radius: rem(50);
+    box-shadow: 0 rem(30) rem(60) 0 rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(rem(40));
+    .listWrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      .list {
+        padding: rem(4) rem(12);
+        .link {
+          display: flex;
+          align-items: center;
+          &:hover .listImg {
+            transform: translateY(rem(-2)) scale(1.1);
+          }
+          .listImg {
+            transition: transform 0.3s ease;
+            width: rem(16);
+          }
+          .listText {
+            font-size: rem(13);
+            font-weight: 500;
+            color: #fff;
+            margin-left: rem(8);
+          }
+        }
+        &:last-child .link {
+          cursor: default;
+          &:hover .listText{
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+  .downloadBtn {
+    padding: rem(4) rem(20);
+    border: rem(1) solid rgba(255, 255, 255, 0.4);
+    border-radius: rem(30);
+    backdrop-filter: blur(rem(40));
+    box-shadow: 0 rem(30) rem(60) rgba(0, 0, 0, 0.25);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.11) 0%,
+      rgba(204, 204, 204, 0.0878) 20%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    font-size: rem(14);
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      //??
+    }
+  }
+}
+
+.isNew {
+  font-size: rem(10);
+  font-weight: 500;
+  letter-spacing: rem(0.2);
+  color: #fff;
+  border-radius: rem(10);
+  line-height: rem(14);
+  padding: 0 rem(6);
+  height: rem(15);
+  background: #1E1F1F;
+  margin-left: rem(8);
+}
+
+.popOverContainer {
+  position: absolute;
+  width: rem(522);
+  height: rem(339);
+  transform: translate(rem(-215), rem(175));
+  .wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: rem(31);
+    width: 100%;
+    border: 1px solid rgb(87, 87, 99);
+    border-radius: rem(15);
+    opacity: 1;
+    padding: rem(15);
+    background-color: rgba(209, 209, 209, 0.15);
+    backdrop-filter: blur(rem(40));
+    -webkit-backdrop-filter: blur(rem(40));
+    position: absolute;
+    bottom: 0;
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: rem(18);
+      .itemWrap {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: rem(8);
+        width: 100%;
+        .left {
+          font-size: rem(20);
+          color: rgb(217, 217, 217);
+          padding-top: rem(3);
+          transition: transform 0.3s ease;
+          &.isHovered {
+            transform: translateY(rem(-2)) scale(1.1);
+          }
+        }
+        .right {
+          width: 100%;
+          .name {
+            font-size: rem(14);
+            font-weight: 500;
+            letter-spacing: rem(-0.05);
+            color: rgb(255, 255, 255);
+            line-height: rem(20);
+          }
+          .desc {
+            font-size: rem(10);
+            font-weight: 500;
+            letter-spacing: rem(-0.1);
+            color: rgb(179, 185, 196);
+            line-height: rem(15);
+          }
+        }
+      }
+    }
+  }
+}

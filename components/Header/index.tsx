@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { clsx } from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import {
   LuAlertCircle,
   LuAlertTriangle,
@@ -16,6 +17,7 @@ import {
   LuShieldCheck,
   LuWifiOff,
 } from 'react-icons/lu';
+import MaxWidth from '@/components/MaxWidth';
 
 const navList = [
   {
@@ -37,6 +39,10 @@ const navList = [
     name: 'Developer',
     img: '/header/developer.png',
     navigateTo: '/developer',
+  },
+  {
+    name: 'More',
+    img: '/header/more.png',
   },
 ];
 
@@ -95,10 +101,129 @@ const moreList = {
   ],
 };
 
-const PopOver = () => {};
+const PopOver = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <div className={styles.popOverContainer}>
+      <div className={styles.wrapper}>
+        <div className={styles.column}>
+          {moreList.firstCol.map((items, index) => (
+            <div key={index} className={styles.itemWrap}>
+              <div
+                className={clsx(styles.left, {
+                  [styles.isHovered]: hoveredIndex === index,
+                })}
+              >
+                {items.img}
+              </div>
+              <div className={styles.right}>
+                <Link
+                  href={items.navigateTo}
+                  className={styles.name}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {items.name}
+                </Link>
+                <p className={styles.desc}>{items.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.column}>
+          {moreList.secondCol.map((items, index) => (
+            <div key={index} className={styles.itemWrap}>
+              <div
+                className={clsx(styles.left, {
+                  [styles.isHovered]:
+                    hoveredIndex === index + moreList.secondCol.length,
+                })}
+              >
+                {items.img}
+              </div>
+              <div className={styles.right}>
+                <Link
+                  href={items.navigateTo}
+                  className={styles.name}
+                  onMouseEnter={() =>
+                    setHoveredIndex(index + moreList.secondCol.length)
+                  }
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {items.name}
+                </Link>
+                <p className={styles.desc}>{items.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Header = () => {
-  return <div>Header</div>;
+  const [isMoreHovered, setIsMoreHovered] = useState<boolean>(false);
+  const router = useRouter();
+  const isNew = true;
+  return (
+    <header className={styles.header}>
+      <MaxWidth className={styles.widthComponent}>
+        <div className={styles.logoWrapper} onClick={() => router.push('/')}>
+          <Image src='/logo.png' alt='Logo' width={72} height={72} />
+          <span>Enigma-AI</span>
+        </div>
+        <nav className={styles.nav}>
+          <ul className={styles.listWrapper}>
+            {navList.map((item, index) => (
+              <li key={index} className={styles.list}>
+                {item.name === 'More' ? (
+                  <div
+                    className={styles.link}
+                    onMouseEnter={() => setIsMoreHovered(true)}
+                    onMouseLeave={() => setIsMoreHovered(false)}
+                  >
+                    <Image
+                      src={item.img}
+                      alt={item.name}
+                      width={33}
+                      height={32}
+                      className={styles.listImg}
+                    />
+                    <span className={styles.listText}>{item.name}</span>
+                    {isMoreHovered && <PopOver />}
+                  </div>
+                ) : (
+                  item.navigateTo && (
+                    <Link href={item.navigateTo} className={styles.link}>
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        width={33}
+                        height={32}
+                        className={styles.listImg}
+                      />
+                      <span className={styles.listText}>{item.name}</span>
+                      {isNew && index === 2 && (
+                        <span className={styles.isNew}>New</span>
+                      )}
+                    </Link>
+                  )
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <button
+          className={styles.downloadBtn}
+          onClick={() => router.push('/download')}
+        >
+          Download App
+        </button>
+      </MaxWidth>
+    </header>
+  );
 };
 
 export default Header;
